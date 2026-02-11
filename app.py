@@ -11,4 +11,5 @@ if st.button("Trova qualcosa di simile"):
     if titolo:
         risposta = client.chat.completions.create(model="opena/gpt-4o-mini",messages=[{"role": "system", "content": "sei un assistente che consiglia film o seriesimili a quello indicato, basandotisullo stesso mood e genere."},
                                                                                       {"role": "user", "content": titolo}])
-st.writer(risposta.choices[0].message.content)
+st.write(risposta.choices[0].message.content)
+
