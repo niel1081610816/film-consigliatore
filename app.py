@@ -6,7 +6,7 @@ client = OpenAI(
     base_url="https://openrouter.ai/api/v1"
 )
 
-st.title("Consigliatore Film/Serie 🎬")
+st.title("Consigliatore Film/Serie")
 
 film = st.text_input("Scrivi un film o serie che ti è piaciuto:")
 
@@ -19,5 +19,6 @@ if st.button("Trova qualcosa con lo stesso mood"):
         st.write(risposta.output_text)
     else:
         st.warning("Scrivi prima un film o serie.")
+
 
 
