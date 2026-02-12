@@ -15,3 +15,4 @@ testo = risposta.choices[0].message["content"]
 st.write(testo)
 
 
+
