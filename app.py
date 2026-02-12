@@ -1,7 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 
-client = OpenAI(api_key="sk-or-v1-44b...055", base_url="httpsw://openrouter.ai/api/v1")
+client = OpenAI(api_key="sk-or-v1-37c...9a8", base_url="httpsw://openrouter.ai/api/v1")
 
 st.title("Consigliatore Film/Serie")
 
@@ -13,4 +13,5 @@ if st.button("Trova qualcosa di simile"):
                                                                                       {"role": "user", "content": titolo}])
 testo = risposta.choices[0].message["content"]
 st.write(testo)
+
 
