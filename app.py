@@ -11,14 +11,14 @@ film = st.text_input("Scrivi un film o serie che ti è piaciuto:")
 
 if st.button("Trova qualcosa con lo stesso mood"):
     if film:
-        risposta = client.chat.completions.create(
+        risposta = client.resonses.create(
             model="gpt-4o-mini",
-            messages=[{"role": "system", "content": "Consiglia un film o serie con lo stesso mood."},{"role": "user", "content": film}])
+            input=f"consigliaun film o serie con lo stesso mood di: {film}")
 
-        testo = risposta.choices[0].message["content"]
-        st.write(testo)
+        st.write(risposta.output_text)
 
     else:
         st.warning("Scrivi prima un film o serie.")
+
 
 
