@@ -2,9 +2,7 @@ import streamlit as st
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="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
-
-",
+    api_key="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",
     base_url="https://openrouter.ai/api/v1"
 )
 
@@ -21,6 +19,7 @@ if st.button("Trova qualcosa con lo stesso mood"):
         st.write(risposta.output_text)
     else:
         st.warning("Scrivi prima un film o una serie.")
+
 
 
 
