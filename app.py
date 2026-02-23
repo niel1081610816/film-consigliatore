@@ -2,7 +2,9 @@ import streamlit as st
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="openchat/openchat-3.5-0106:free",
+    api_key="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
+
+",
     base_url="https://openrouter.ai/api/v1"
 )
 
@@ -13,7 +15,7 @@ film = st.text_input("Scrivi un film o serie che ti è piaciuto:")
 if st.button("Trova qualcosa con lo stesso mood"):
     if film:
         risposta = client.responses.create(
-            model="gpt-4o-mini",
+            model="openchat/openchat-3.5-0106:free",
             input=f"Consiglia un film o serie con lo stesso mood di: {film}"
         )
         st.write(risposta.output_text)
