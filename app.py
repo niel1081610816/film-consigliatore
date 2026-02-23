@@ -18,7 +18,8 @@ if st.button("Trova qualcosa con lo stesso mood"):
         )
         st.write(risposta.output_text)
     else:
-        st.warning("Scrivi prima un film o serie.")
+        st.warning("Scrivi prima un film o una serie.")
+
 
 
 
