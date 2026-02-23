@@ -14,14 +14,7 @@ if st.button("Trova qualcosa con lo stesso mood"):
     if film:
         risposta = client.responses.create(
             model="openchat/openchat-3.5-0106:free",
-            input=f"Consiglia un film o serie con lo stesso mood di: {film}"
-        )
+            input=f"Consiglia un film o serie con lo stesso mood di: {film}")
         st.write(risposta.output_text)
     else:
         st.warning("Scrivi prima un film o una serie.")
-
-
-
-
-
-
