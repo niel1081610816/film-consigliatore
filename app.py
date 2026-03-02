@@ -1,22 +1,35 @@
 import streamlit as st
-from openai import OpenAI
+from supabase import create_client
+url = "https://jnaujwpfuhynogktbfua.supabase.co"
+key= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYXVqd3BmdWh5bm9na3RiZnVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NjkyOTksImV4cCI6MjA4ODA0NTI5OX0.X_PFJHONaGMYqAJG-5Br7iE4_xsv-umiFcLyl-JiMuw"
+supabase = create_client(url, key)
+st.title("Titolo del sito")
+nome = st.text_input("Nome")
+ruolo = st.selectbox("Chi sei?", ["produttore", "cantante", "entrambi"])
+genere = st.selectbox("genere", ["uomo", "donna", "nessuno dei due", "preferisco non rispondere"])
+if st.button("Salva il profilo"):
+    st.success("Profilo salvato")
 
-client = OpenAI(
-    api_key="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",
-    base_url="https://openrouter.ai/api/v1"
-)
+def match(user, others):
+    risultati = []
+    for u in others:
+        score = 0
+        if user["genere"] == u["genere"]:
+            score += 50
+        if abs(user["bpm"] - u["bpm"]) < 10:
+            score += 30
+        if user["ruolo"] != u["ruolo"]:
+            score += 20
+        risultati.append((u, score))
+    return sorted(risultati, key=lambda x: x[1], reverse=True)
 
-st.title("Consigliatore Film/Serie")
+if data.data:
+    current_user = data.data[-1]  # ultimo inserito
 
-film = st.text_input("Scrivi un film o serie che ti è piaciuto:")
+    risultati = match(current_user, data.data)
 
-if st.button("Trova qualcosa con lo stesso mood"):
-    if film:
-        risposta = client.responses.create(
-            model="openchat/openchat-3.5-0106:free",
-            input=f"Elenca tre film/serie con lo stesso mood di: {film}")
-        st.write(risposta.output_text)
-    else:
-        st.warning("Scrivi prima un film o una serie.")
+    st.subheader("Collaboratori suggeriti")
 
-
+    for u, score in risultati:
+        if u["nome"] != current_user["nome"]:
+            st.write(u["nome"], "-", score)
