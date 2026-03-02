@@ -35,12 +35,13 @@ if response.data:
         if u["nome"] != current_user["nome"]:
             st.write(u["nome"], "-", score)
 
-current_user = data.data[-1]
+current_user = response.data[-1]
 risultati = match(current_user, response.data)
 
 st.subheader("Collaboratori suggeriti")
 for u, score in risultati:
     if u["nome"] != current_user["nome"]:st.write(f"{u['nome']} ➝‬ compatibilità: {score}%")
+
 
 
 
