@@ -33,3 +33,4 @@ if data.data:
     for u, score in risultati:
         if u["nome"] != current_user["nome"]:
             st.write(u["nome"], "-", score)
+
