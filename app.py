@@ -7,6 +7,7 @@ st.title("Titolo del sito")
 nome = st.text_input("Nome")
 ruolo = st.selectbox("Chi sei?", ["produttore", "cantante", "entrambi"])
 genere = st.selectbox("genere", ["uomo", "donna", "nessuno dei due", "preferisco non rispondere"])
+response = supabase.table("utenti").select("*").execute()
 if st.button("Salva il profilo"):
     response = supabase.table("utenti").insert({"nome": nome, "genere": genere, "ruolo" :ruolo}).execute()
     st.success("Profilo salvato")
@@ -36,6 +37,7 @@ if response.data:
 
 
     if u["nome"] != current_user["nome"]:st.write(f"{u['nome']} ➝‬ compatibilità: {score}%")
+
 
 
 
