@@ -23,11 +23,9 @@ def match(user, others):
         risultati.append((u, score))
     return sorted(risultati, key=lambda x: x[1], reverse=True)
 response = supabase.table("utenti").select("*").execute()
-if response.data:
-    users = response.data
 
-if data.data:
-    current_user = data.data[-1]  # ultimo inserito
+if response.data:
+    current_user = response.data[-1]  # ultimo inserito
 
     risultati = match(current_user, data.data)
 
@@ -43,5 +41,6 @@ risultati = match(current_user, data.data)
 st.subheader("Collaboratori suggeriti")
 for u, score in risultati:
     if u["nome"] != current_user["nome"]:st.write(f"{u['nome']} ➝‬ compatibilità: {score}%")
+
 
 
