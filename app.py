@@ -6,7 +6,7 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtq
 supabase = create_client(url,key)
 nome = st.text_input("Nome")
 ruolo = st.selectbox("Chi sei?",["produttore", "cantante", "entrambi"])
-genere = st.selectbox("genere", ["uomo", "donna", "nessuno dei due", "preferisco non rispondere"])
+genere = st.selectbox("genere", ["rock", "rap/trap", "pop", "classico", "tecno/elettro", "jazz"])
 if st.button("Salva il profilo"):
     supabase.table("utenti").insert({
         "nome": nome,
@@ -26,7 +26,7 @@ def match(user, others):
             score += 50
 
         if user["ruolo"] != u["ruolo"]:
-            score += 50
+            score != 50
 
         risultati.append((u, score))
 
@@ -48,6 +48,7 @@ if data and len(data) > 1:
     for u, score in risultati:
         if u["nome"] != current_user["nome"]:
             st.write(f"{u['nome']} → compatibilità: {score}%")
+
 
 
 
