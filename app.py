@@ -38,18 +38,14 @@ def match(user, others):
         risultati.append((u, score))
     return sorted(risultati, key=lambda x: x[1], reverse=True)
 if response.data:
-    current_user = response.data[-1]
-
-    risultati = match(current_user, data.data)
-
     st.subheader("Collaboratori suggeriti")
 
-    for u, score in risultati:
-        if u["nome"] != current_user["nome"]:
-            st.write(u["nome"], "-", score)
+    for u in risultati:
+        st.write(u["nome"], "-", u[ruolo])
 
 
     if u["nome"] != current_user["nome"]:st.write(f"{u['nome']} compatibilità: {score}%")
+
 
 
 
