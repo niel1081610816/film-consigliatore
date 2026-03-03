@@ -17,7 +17,7 @@ if st.button("Salva il profilo"):
         "nome": nome,
         "genere": genere,
         "ruolo": ruolo
-    }).execute()
+    })
 
     st.success("Profilo salvato!")
 
@@ -32,7 +32,7 @@ def match(user, others):
         risultati.append((u, score))
     return sorted(risultati, key=lambda x: x[1], reverse=True)
 
-response = supabase.table("utenti").select("*").execute()
+response = supabase.table("utenti").select("*")
 
 if response.data and len(response.data) > 1:
     current_user = response.data[-1]
@@ -47,3 +47,4 @@ if response.data and len(response.data) > 1:
 
 else:
     st.write("Inserisci almeno 2 utenti per vedere i match")
+
