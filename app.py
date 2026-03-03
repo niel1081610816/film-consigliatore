@@ -50,7 +50,8 @@ if response.data:
             st.write(u["nome"], "-", score)
 
 
-    if u["nome"] != current_user["nome"]:st.write(f"{u['nome']} ➝‬ compatibilità: {score}%")
+    if u["nome"] != current_user["nome"]:st.write(f"{u['nome']} compatibilità: {score}%")
+
 
 
 
