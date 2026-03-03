@@ -29,7 +29,7 @@ def match(user, others):
             score += 50
 
         risultati.append((u, score))
-    risultati = [r for r in risultati if r[1] >= 50]
+    risultati = [r for r in risultati if r[1] >= 60]
     return sorted(risultati, key=lambda x: x[1
                 ], reverse=True)
 
@@ -49,6 +49,7 @@ if data and len(data) > 1:
     for u, score in risultati:
         if u["nome"] != current_user["nome"]:
             st.write(f"{u['nome']} → compatibilità: {score}%")
+
 
 
 
