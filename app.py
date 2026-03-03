@@ -9,8 +9,27 @@ ruolo = st.selectbox("Chi sei?", ["produttore", "cantante", "entrambi"])
 genere = st.selectbox("genere", ["uomo", "donna", "nessuno dei due", "preferisco non rispondere"])
 response = supabase.table("utenti").select("*").execute()
 if st.button("Salva il profilo"):
-    response = supabase.table("utenti").insert({"nome": nome, "genere": genere, "ruolo" :ruolo}).execute()
-    st.success("Profilo salvato")
+    supabase.table("utenti").insert({
+        "nome": nome,
+        "genere": genere,
+        "ruolo": ruolo
+    }).execute()
+
+    st.success("Profilo salvato!")
+
+# 👉 FUORI dal bottone
+response = supabase.table("utenti").select("*").execute()
+
+if response.data:
+    current_user = response.data[-1]
+
+    risultati = match(current_user, response.data)
+
+    st.subheader("Collaboratori suggeriti")
+
+    for u, score in risultati:
+        if u["nome"] != current_user["nome"]:
+            st.write(u["nome"], "→", score)
 
 def match(user, others):
     risultati = []
@@ -37,6 +56,7 @@ if response.data:
 
 
     if u["nome"] != current_user["nome"]:st.write(f"{u['nome']} ➝‬ compatibilità: {score}%")
+
 
 
 
