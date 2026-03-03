@@ -17,6 +17,24 @@ if st.button("Salva il profilo"):
     st.success("Profilo salvato!")
 
 
+def match(user, others):
+    risultati = []
+    for u in others:
+        score = 0
+
+        if user["genere"] == u["genere"]:
+            score += 50
+
+        if user["ruolo"] != u["ruolo"]:
+            score += 50
+
+        risultati.append((u, score))
+
+    return sorted(risultati, key=lambda x: x[1], reverse=True)
+
+
+
+
 response = supabase.table("utenti").select("*").execute()
 data = response.data
 
@@ -30,6 +48,7 @@ if data and len(data) > 1:
     for u, score in risultati:
         if u["nome"] != current_user["nome"]:
             st.write(f"{u['nome']} → compatibilità: {score}%")
+
 
 
 
