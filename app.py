@@ -1,5 +1,6 @@
 
-
+import streamlit as st
+from supabase import create_client
 if st.button("Salva il profilo"):
     supabase.table("utenti").insert({
         "nome": nome,
@@ -23,6 +24,7 @@ if data and len(data) > 1:
     for u, score in risultati:
         if u["nome"] != current_user["nome"]:
             st.write(f"{u['nome']} → compatibilità: {score}%")
+
 
 
 
