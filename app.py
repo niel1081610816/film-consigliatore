@@ -26,7 +26,7 @@ def match(user, others):
             score += 50
 
         if user["ruolo"] != u["ruolo"]:
-            score != 50
+            score += 50
 
         risultati.append((u, score))
 
@@ -48,6 +48,7 @@ if data and len(data) > 1:
     for u, score in risultati:
         if u["nome"] != current_user["nome"]:
             st.write(f"{u['nome']} → compatibilità: {score}%")
+
 
 
 
