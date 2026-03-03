@@ -1,17 +1,5 @@
-import streamlit as st
-from supabase import create_client
 
-url = "https://kjqncgasirjzilovibat.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqcW5jZ2FzaXJqemlsb3ZpYmF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NjkyNTgsImV4cCI6MjA4ODA0NTI1OH0.qDVawy4rq8QCO9fP5tJsTSVN8PrgZW5BKwFOWxX2ECIY"
-
-supabase = create_client(url, key)
-
-st.title("Titolo del sito")
-
-nome = st.text_input("Nome")
-ruolo = st.selectbox("Chi sei?", ["produttore", "cantante", "entrambi"])
-genere = st.selectbox("Genere", ["uomo", "donna", "nessuno dei due", "preferisco non rispondere"])
-
+# SALVA
 if st.button("Salva il profilo"):
     supabase.table("utenti").insert({
         "nome": nome,
@@ -21,23 +9,14 @@ if st.button("Salva il profilo"):
 
     st.success("Profilo salvato!")
 
-def match(user, others):
-    risultati = []
-    for u in others:
-        score = 0
-        if user["genere"] == u["genere"]:
-            score += 50
-        if user["ruolo"] != u["ruolo"]:
-            score += 50
-        risultati.append((u, score))
-    return sorted(risultati, key=lambda x: x[1], reverse=True)
-
+# LEGGI
 response = supabase.table("utenti").select("*")
+data = response.data
 
-if response.data and len(response.data) > 1:
-    current_user = response.data[-1]
+if data and len(data) > 1:
+    current_user = data[-1]
 
-    risultati = match(current_user, response.data)
+    risultati = match(current_user, data)
 
     st.subheader("Collaboratori suggeriti")
 
@@ -45,6 +24,6 @@ if response.data and len(response.data) > 1:
         if u["nome"] != current_user["nome"]:
             st.write(f"{u['nome']} → compatibilità: {score}%")
 
-else:
-    st.write("Inserisci almeno 2 utenti per vedere i match")
+
+
 
